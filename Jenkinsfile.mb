@@ -1,6 +1,9 @@
 node {
-    // only Jenkinsfile,mb will be checked-out
-    
+    // only Jenkinsfile.mb will be checked-out
+    // specifiy your config repo.
+    def URL = "https://github.com/reyzheng/jenkins-config.git",
+    def BRANCH = ""
+    def CREDENTIALS = ""
     // Bring up CTC pipeline framework
     def mb
     dir('.pf-bringup') {
@@ -17,5 +20,5 @@ node {
         """
         pf = load("hera.groovy")
     }
-    pf.start()
+    pf.start(URL, BRANCH, CREDENTIALS)
 }
