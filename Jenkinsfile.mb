@@ -18,7 +18,7 @@ node {
             echo '@Jenkinsfile.mb'
             pwd && ls -al
         """
-        pf = load("hera.groovy")
+        mb = load("hera.groovy")
     }
-    pf.start(URL, BRANCH, CREDENTIALS)
+    mb.start(URL, BRANCH, CREDENTIALS)
 }
