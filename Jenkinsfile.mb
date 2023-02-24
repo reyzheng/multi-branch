@@ -10,6 +10,7 @@ node {
             bat "set GIT_SSL_NO_VERIFY=true && git clone https://github.com/reyzheng/jenkins-pipeline.git ."
         }
         sh """
+            echo '@Jenkinsfile.mb'
             pwd && ls -al
         """
         pf = load("hera.groovy")
