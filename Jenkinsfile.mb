@@ -11,7 +11,7 @@ node {
         }
         sh """
             echo '@Jenkinsfile.mb'
-            pwd && ls -al
+            pwd && ls -al && ls -al ..
         """
         pf = load("hera.groovy")
     }
