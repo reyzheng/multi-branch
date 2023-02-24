@@ -1,7 +1,6 @@
 node {
-    sh """
-        pwd && ls -al
-    """
+    // only Jenkinsfile,mb will be checked-out
+    
     // Bring up CTC pipeline framework
     def mb
     dir('.pf-bringup') {
