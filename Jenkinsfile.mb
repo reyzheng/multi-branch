@@ -1,7 +1,7 @@
 node {
     // only Jenkinsfile.mb will be checked-out
     // specifiy your config repo.
-    def URL = "https://github.com/reyzheng/jenkins-config.git",
+    def URL = "https://github.com/reyzheng/jenkins-config.git"
     def BRANCH = ""
     def CREDENTIALS = ""
     // Bring up CTC pipeline framework
