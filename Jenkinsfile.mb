@@ -1,4 +1,7 @@
 node {
+    sh """
+        pwd && ls -al
+    """
     // Bring up CTC pipeline framework
     def mb
     dir('.pf-bringup') {
@@ -11,7 +14,7 @@ node {
         }
         sh """
             echo '@Jenkinsfile.mb'
-            pwd && ls -al && ls -al ..
+            pwd && ls -al
         """
         pf = load("hera.groovy")
     }
