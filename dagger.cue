@@ -56,35 +56,8 @@ dagger.#Plan & {
 					contents: client.filesystem."./".read.contents
 					dest:     "/src"
 				},
-				//bash.#Run & {
-				//	workdir: "/src"
-				//	mounts: {
-				//		"/cache/yarn": {
-				//			dest:     "/cache/yarn"
-				//			type:     "cache"
-				//			contents: core.#CacheDir & {
-				//				id: "todoapp-yarn-cache"
-				//			}
-				//		}
-				//		_nodeModulesMount
-				//	}
-				//	script: contents: #"""
-				//		yarn config set cache-folder /cache/yarn
-				//		yarn install
-				//		"""#
-				//},
 			]
 		}
-
-		//test: bash.#Run & {
-		//	input:   deps.output
-		//	workdir: "/src"
-		//	mounts:  _nodeModulesMount
-		//	script: contents: #"""
-		//		yarn run test
-		//		"""#
-		//}
-
 		build: {
 			run: bash.#Run & {
 				input:   deps.output
@@ -104,7 +77,6 @@ dagger.#Plan & {
 				path:  "/src/build"
 			}
 		}
-
 		//deploy: netlify.#Deploy & {
 		//	contents: build.contents.output
 		//	site:     client.env.APP_NAME
