@@ -63,7 +63,6 @@ dagger.#Plan & {
 					pwd && ls -al
 					"""#
 			}
-
 			contents: core.#Subdir & {
 				input: run.output.rootfs
 				path:  "/src/build"
