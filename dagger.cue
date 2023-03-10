@@ -42,13 +42,6 @@ dagger.#Plan & {
 	actions: {
 		deps: docker.#Build & {
 			steps: [
-				//alpine.#Build & {
-				//	packages: {
-				//		bash: {}
-				//		yarn: {}
-				//		git: {}
-				//	}
-				//},
 				docker.#Pull & {
 					source: "index.docker.io/gcc:12.2"
 				},
