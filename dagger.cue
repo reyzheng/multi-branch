@@ -46,7 +46,7 @@ dagger.#Plan & {
 				},
 				docker.#Copy & {
 					contents: client.filesystem."./".read.contents
-					dest:     "/src"
+					dest:     "/workspace"
 				},
 			]
 		}
@@ -54,7 +54,7 @@ dagger.#Plan & {
 			run: bash.#Run & {
 				input:   deps.output
 				//mounts:  _nodeModulesMount
-				workdir: "/src"
+				workdir: "/workspace"
 				script: contents: #"""
 					#yarn run build
 					pwd && ls -al
@@ -65,7 +65,7 @@ dagger.#Plan & {
 			}
 			contents: core.#Subdir & {
 				input: run.output.rootfs
-				path:  "/src/build"
+				path:  "/workspace/build"
 			}
 		}
 		//deploy: netlify.#Deploy & {
