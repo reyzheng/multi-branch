@@ -58,9 +58,9 @@ dagger.#Plan & {
 				script: contents: #"""
 					#yarn run build
 					pwd && ls -al
-					#mkdir build
-					#gcc source/test.c -o build/test
-					#pwd && ls -al
+					mkdir build
+					gcc source/test.c -o build/test
+					pwd && ls -al
 					"""#
 			}
 
