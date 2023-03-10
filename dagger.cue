@@ -22,7 +22,7 @@ dagger.#Plan & {
 	client: {
 		filesystem: {
 			//"./": read: {
-			"./source": read: {
+			".": read: {
 				contents: dagger.#FS
 				exclude: [
 					//"README.md",
