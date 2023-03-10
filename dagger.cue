@@ -30,7 +30,7 @@ dagger.#Plan & {
 					//"node_modules",
 				]
 			}
-			"./_build": write: contents: actions.build.contents.output
+			//"./_build": write: contents: actions.build.contents.output
 		}
 		//env: {
 		//	APP_NAME:      string
@@ -63,10 +63,10 @@ dagger.#Plan & {
 					pwd && ls -al
 					"""#
 			}
-			contents: core.#Subdir & {
-				input: run.output.rootfs
-				path:  "/src/build"
-			}
+			//contents: core.#Subdir & {
+			//	input: run.output.rootfs
+			//	path:  "/src/build"
+			//}
 		}
 		//deploy: netlify.#Deploy & {
 		//	contents: build.contents.output
