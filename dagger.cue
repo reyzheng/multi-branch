@@ -21,13 +21,12 @@ dagger.#Plan & {
 	//}
 	client: {
 		filesystem: {
-			//"./": read: {
-			".": read: {
+			"./": read: {
 				contents: dagger.#FS
 				exclude: [
 					//"README.md",
-					//"_build",
-					//"pipeline.cue",
+					"_build",
+					//"dagger.cue",
 					//"node_modules",
 				]
 			}
