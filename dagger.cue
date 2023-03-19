@@ -7,6 +7,7 @@ import (
 	//"universe.dagger.io/alpine"
 	"universe.dagger.io/bash"
 	"universe.dagger.io/docker"
+	//"universe.dagger.io/docker/cli"
 	//"universe.dagger.io/netlify"
 )
 
@@ -26,12 +27,18 @@ dagger.#Plan & {
 				exclude: [
 					//"README.md",
 					"_build",
+                    "sdlc",
+                    "singularity",
 					//"dagger.cue",
 					//"node_modules",
 				]
-			}
+			},
+			"/home/reycheng/cov-analysis-linux64-2022.12.0": read: {
+				contents: dagger.#FS
+			},
 			"./_build": write: contents: actions.build.contents.output
 		}
+		network: "unix:///var/run/docker.sock": connect: dagger.#Socket
 		//env: {
 		//	APP_NAME:      string
 		//	NETLIFY_TEAM:  string
@@ -42,26 +49,37 @@ dagger.#Plan & {
 		deps: docker.#Build & {
 			steps: [
 				docker.#Pull & {
-					source: "index.docker.io/gcc:12.2"
+					source: "index.docker.io/gcc:12.2.0"
 				},
+                //docker.#Dockerfile & {
+				//	source: client.filesystem."./".read.contents
+				//	dockerfile: path: "Dockerfile.coverity"
+				//},
 				docker.#Copy & {
 					contents: client.filesystem."./".read.contents
 					dest:     "/workspace"
 				},
+				docker.#Copy & {
+					contents: client.filesystem."/home/reycheng/cov-analysis-linux64-2022.12.0".read.contents
+					dest:     "/opt/coverity"
+				},
 			]
 		}
+		//run: cli.#Run & {
+		//	host: client.network."unix:///var/run/docker.sock".connect
+		//	command: name: "run coverity-singularity"
+		//}
 		build: {
 			run: bash.#Run & {
 				input:   deps.output
 				//mounts:  _nodeModulesMount
 				workdir: "/workspace"
 				script: contents: #"""
-					#yarn run build
-					pwd && ls -al
 					mkdir build
+					ls -al /opt/coverity
+					/opt/coverity/bin/cov-configure --config build/covertiy.xml --gcc --template
 					gcc source/test.c -o build/a.out
-					pwd && ls -al
-					"""#
+				"""#
 			}
 			contents: core.#Subdir & {
 				input: run.output.rootfs
