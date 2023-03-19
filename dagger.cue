@@ -76,9 +76,9 @@ dagger.#Plan & {
 				workdir: "/workspace"
 				script: contents: #"""
 					mkdir build
-					ls -al /opt/coverity
 					/opt/coverity/bin/cov-configure --config build/covertiy.xml --gcc --template
-					gcc source/test.c -o build/a.out
+					/opt/coverity/bin/cov-build --dir build/.covbuild --config build/covertiy.xml gcc source/test.c -o build/test
+					#gcc source/test.c -o build/a.out
 				"""#
 			}
 			contents: core.#Subdir & {
